@@ -1,0 +1,100 @@
+.album-header {
+  position: relative;
+    overflow: hidden;
+    width:1200px;
+    height: 280px;
+    margin:0 auto;
+    background: url(../images/bg.jpeg);
+    color: #fff;
+    margin-top: 20px;
+}
+.album-header-bg, .album-header-bg-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 280px;
+}
+.album-header-bg-mask {
+    top: 0;
+    height: 280px;
+    background-color: #000;
+    opacity: .24;
+    filter: alpha(opacity=24);
+}
+.album-header-info {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -356px;
+    width: 712px;
+    height: 208px;
+    font-size: 13px;
+}
+.tc {
+    text-align: center;
+}
+.album-header-info h1 {
+    font-size: 28px;
+    font-weight: 400;
+}
+.album-desc {
+    line-height: 22px;
+    overflow: hidden;
+    word-break: break-word;
+    max-height: 66px;
+}
+.album-header-attr-mask {
+    background-color: #000;
+    opacity: .32;
+    filter: alpha(opacity=32);
+}
+.album-header-attr, .album-header-attr-mask {
+    position: absolute;
+    width: 100%;
+    height: 72px;
+    bottom: 0;
+    left: 0;
+}
+.tc {
+    text-align: center;
+}
+.album-action {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    width: 300px;
+    margin-left: -120px;
+    text-align: center;
+}
+.albumcollectbtn:link, .albumcollectbtn:visited {
+    width: 70px;
+    line-height: 32px;
+    text-align: center;
+    background-color: #f46;
+    margin-right: 20px;
+}
+.albumlikebtn:link, .albumlikebtn:visited {
+    width: 70px;
+    line-height: 32px;
+    text-align: center;
+    background-color: #FB3;
+    margin-right: 20px;
+}
+.talkbtn:link, .talkbtn:visited {
+    width: 70px;
+    line-height: 32px;
+    text-align: center;
+    background-color: rgb(161, 236, 161);
+}
+post:link, .album-post:visited,.talkbtn:link, .talkbtn:visited, .albumcollectbtn:link, .albumcollectbtn:visited, .albumlikebtn:link, .albumlikebtn:visited {
+    height: 32px;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 2px;
+    font-size: 14px;
+    color: #fff;
+}
+.btn-log{
+    background-color: #f46
+}

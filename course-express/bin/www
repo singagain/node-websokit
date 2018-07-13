@@ -1,0 +1,153 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+//依赖加载
+//引入我们上面导出的app实例
+var app = require('../app');
+//引入debug模块，打印调试日志
+var debug = require('debug')('course-express:server');
+var http = require('http');
+var server = http.createServer(app);
+var io = require('socket.io')(server);
+/**
+ * Get port from environment and store in Express.
+ */
+//定义启动端口
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+// io.on('connection', function(socket){
+  // socket.on('chat message', function(msg){
+  //   io.emit('chat message', msg);
+  // });
+// });
+
+
+var roomInfo = {};
+io.on('connection', function (socket) {
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+  });
+  // 获取请求建立socket连接的url
+  // 如: http://localhost:3000/room/room_1, roomID为room_1
+  var url = socket.request.headers.referer;
+  var splited = url.split('/');
+  var roomID = splited[splited.length - 1];   // 获取房间ID
+  var user = '';
+
+  socket.on('join', function (userName) {
+    user = userName;
+
+    // 将用户昵称加入房间名单中
+    if (!roomInfo[roomID]) {
+      roomInfo[roomID] = [];
+    }
+    roomInfo[roomID].push(user);
+
+    socket.join(roomID);    // 加入房间
+    // 通知房间内人员
+    io.to(roomID).emit('sys', user + '加入了房间', roomInfo[roomID]);  
+    console.log(user + '加入了' + roomID);
+  });
+
+  socket.on('leave', function () {
+    socket.emit('disconnect');
+  });
+
+  socket.on('disconnect', function () {
+    // 从房间名单中移除
+    var index = roomInfo[roomID].indexOf(user);
+    if (index !== -1) {
+      roomInfo[roomID].splice(index, 1);
+    }
+
+    socket.leave(roomID);    // 退出房间
+    io.to(roomID).emit('sys', user + '退出了房间', roomInfo[roomID]);
+    console.log(user + '退出了' + roomID);
+  });
+
+  // 接收用户消息,发送相应的房间
+  socket.on('message', function (msg) {
+    // 验证如果用户不在房间内则不给发送
+    if (roomInfo[roomID].indexOf(user) === -1) {  
+      return false;
+    }
+    io.to(roomID).emit('msg', user, msg);
+  });
+
+});
+
+
+
+
+
+
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+//端口标准化函数
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+//HTTP异常事件处理函数
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+//事件绑定函数
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

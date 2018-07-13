@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/comment.css' />
+  </head>
+  <body>
+      <form action="/comm/talk/" method="post">
+          <h3>社区发帖</h3>
+          <div class="title">
+        <input type="text" name="title" placeholder="标题" />
+      </div>
+      <div class="text">
+        <textarea name="val" /></textarea>
+      </div>
+      <div class="img">
+        图片<input type="file" name="fileImg">
+      </div>
+        <input class="send" type="submit" value="发表评论" />
+      </form>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+body,div,li,a,input,button,ul,dl,dt,dd,h1,h2,h3,h4{
+margin: 0;
+padding: 0;
+}
+body{
+  background-color: #f1f2f3;
+  font-size: 12px;
+}
+a {
+  text-decoration: none;
+}
+img{
+  display: block;
+}
+.nav-top{
+  width: 100%;
+  background-color:#fff;
+  overflow: hidden;
+  /*border-bottom:*/
+  box-shadow: 0 -3px 10px rgba(0,0,0,.8);
+}
+.div-center{
+  width: 1200px;
+  margin: 0 auto;
+}
+.nav-img{
+  width: 80px;
+  float: left;
+  height: 64px;
+  background: url(../images/TXGCC.png) no-repeat 0 12px;
+}
+.nav-name,.nav-notname{
+  float: right;
+}
+.nav-name span{
+  line-height: 64px;
+}
+.nav-name input{
+    border: 0;
+    color: #fff;
+      width: 52px;
+      height: 28px;
+      line-height: 28px;
+      /*background-color: #f46;*/
+      border-radius: 3px;
+      margin: 15px;
+}
+.nav-notname{
+float: right;
+}
+.nav-notname input{
+    border: 0;
+    color: #fff;
+      width: 52px;
+      height: 28px;
+      line-height: 28px;
+      background-color: #f46;
+      border-radius: 3px;
+      margin: 15px;
+}

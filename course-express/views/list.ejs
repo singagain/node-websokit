@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>88888</title>
+      <link rel='stylesheet' href='/stylesheets/list.css' />
+        <link rel='stylesheet' href='/stylesheets/header.css' />
+  </head>
+  <body>
+    <div class="album-header">
+<div class="album-header-bg-mask"></div>
+<table class="album-header-info tc">
+<tbody>
+<tr>
+<td>
+<h1 class="album-title">【cruise】遗落在中国大地上的西洋风情</h1>
+<p class="album-desc">
+走过一条街，总有这样幽雅宁静的庭院：有厚重的墙，雅致的门庭，隔绝了墙外的市井喧嚣，隔绝出另一方清幽的田地．主人又多有雅兴，往往种上萱草玉兰，让春色在窗外花开自在。生活中的场景在不经意间，就成了艺术，生活本来就是艺术。【图·cruise摄影】
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="album-header-attr-mask"></div>
+<div class="album-header-attr tc">
+<div class="album-action dib">
+<a title="收藏" class="albumcollectbtn" href="comment">发帖</a>
+<a title="赞" class="albumlikebtn " href="list">逛逛</a>
+</div>
+</div>
+<div class="album-header-mask dn"></div>
+</div>
+<div class="div-center">
+    <% resData.forEach(function(item, index) { %>
+      <dl>
+        <dt>
+        <a href="/detail?cid=<%= item.cid %>"><img src="images/<%= item.fileImg %>"></a>
+      </dt>
+        <dd class="title"><%= item.title %></dd>
+        <p class="text"><%= item.val %></p>
+      </dl>
+    <% }) %>
+      <div class="page">
+        <a href="/list?pageNo=<%= pageNo>1 %>">首页</a>
+        <a href="/list?pageNo=<%= pageNo>1 ? parseInt(pageNo)-1 : 1 %>">上一页</a>
+        第<%= pageNo %>页/共<%= totalPage %>页
+        <a href="/list?pageNo=<%=pageNo<totalPage ? parseInt(pageNo)+1 : totalPage %>">下一页</a>
+        <a href="/list?pageNo=<%= totalPage %>">最后一页</a>
+        共<%= count %>条数据
+    </div>
+  </div>
+  </body>
+</html>

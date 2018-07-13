@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title><%= title %></title></title>
+	<link rel='stylesheet' href='/stylesheets/login.css' />
+</head>
+<body>
+	<form action="/users/login" method="post">
+		<h3>用户登录</h3>
+		<input type="text" name="username" placeholder="请输入用户名"/>
+		<input type="text" name="pwd" placeholder="请输入密码"/>
+		<input type="submit" class="btn" value="提交" />
+	</form>
+</body>
+</html>
